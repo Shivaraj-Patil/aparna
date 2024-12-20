@@ -1,0 +1,44 @@
+{
+  "id": 1,
+  "name": "CEO",
+  "designation": "CEO",
+  "email": "ceo@example.com",
+  "phone": "+1-111-111-1111",
+  "managerId": null,
+  "managerName": null,
+  "children": [
+    {
+      "id": 2,
+      "name": "John Doe",
+      "designation": "Manager",
+      "email": "johndoe@example.com",
+      "phone": "+1-123-456-7890",
+      "managerId": 1,
+      "managerName": "CEO",
+      "children": [
+        {
+          "id": 3,
+          "name": "Jane Smith",
+          "designation": "Developer",
+          "email": "janesmith@example.com",
+          "phone": "+1-234-567-8901",
+          "managerId": 2,
+          "managerName": "John Doe",
+          "children": [
+          
+        ]
+        },
+        {
+          "id": 4,
+          "name": "Bob Johnson",
+          "designation": "Manager",
+          "email": "bobjohnson@example.com",
+          "phone": "+1-345-678-9012",
+          "managerId": 2, 
+          "managerName": "John Doe",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

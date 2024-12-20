@@ -1,0 +1,17 @@
+.node rect {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .node text {
+    font-family: 'Arial, sans-serif';
+  }
+  
+  .link {
+    stroke: #ccc;
+  }
+  
+  svg {
+    border: 1px solid #ccc;
+    overflow: visible;
+  }
+  

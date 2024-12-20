@@ -1,0 +1,55 @@
+<div *ngIf="open" class="dialog-container">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <button aria-label="Close" class="close" type="button" (click)="cancel()">
+        <cds-icon aria-hidden="true" shape="close"></cds-icon>
+      </button>
+      <div class="dialog-title">Add New Reportee</div>
+    </div>
+    <div class="dialog-body">
+      <div class="manager-info">
+        <label>Manager: {{ manager.name }}</label>
+      </div>
+      <form #reporteeForm="ngForm" (ngSubmit)="onSaveClick(reporteeForm)">
+        <div class="clr-form-control">
+          <label>Name</label>
+          <input clrInput [(ngModel)]="newReportee.name" name="name" [required]="true" #name="ngModel" />
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="clr-subtext clr-subtext--error error-message">
+            Name is required.
+          </div>
+        </div>
+        <div class="clr-form-control">
+          <label>Designation</label>
+          <select clrSelect [(ngModel)]="newReportee.designation" name="designation" [required]="true" #designation="ngModel">
+            <option *ngFor="let designation of designations" [value]="designation.designation">
+              {{ designation.designation }}
+            </option>
+          </select>
+          <div *ngIf="designation.invalid && (designation.dirty || designation.touched)" class="clr-subtext clr-subtext--error error-message">
+            Designation is required.
+          </div>
+        </div>
+        <div class="clr-form-control">
+          <label>Email</label>
+          <input clrInput [(ngModel)]="newReportee.email" name="email" type="email" [required]="true" email #email="ngModel" />
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="clr-subtext clr-subtext--error error-message">
+            <div *ngIf="email.errors?.['required']">Email is required.</div>
+            <div *ngIf="email.errors?.['email']">Invalid email address.</div>
+          </div>
+        </div>
+        <div class="clr-form-control">
+          <label>Phone</label>
+          <input clrInput [(ngModel)]="newReportee.phone" name="phone" type="tel" [required]="true" pattern="^[0-9]{10}$" #phone="ngModel" />
+          <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="clr-subtext clr-subtext--error error-message">
+            <div *ngIf="phone.errors?.['required']">Phone number is required.</div>
+            <div *ngIf="phone.errors?.['pattern']">Phone number must be 10 digits.</div>
+          </div>
+        </div>
+        <div class="clr-form-actions">
+          <button class="btn btn-primary" type="submit" [disabled]="reporteeForm.invalid">Save</button>
+          <button class="btn btn-secondary" type="button" (click)="cancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

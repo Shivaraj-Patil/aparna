@@ -1,0 +1,24 @@
+{
+    "designations": [
+        {
+            "deisgnation": "CEO",
+            "add_reportee": true
+        },
+        {
+            "deisgnation": "CTO",
+            "add_reportee": true
+        },
+        {
+            "deisgnation": "Team Lead",
+            "add_reportee": true
+        },
+        {
+            "deisgnation": "Manager",
+            "add_reportee": true
+        },
+        {
+            "deisgnation": "Developer",
+            "add_reportee": false
+        }
+    ]
+}

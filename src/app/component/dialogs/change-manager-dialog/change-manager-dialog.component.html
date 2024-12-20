@@ -1,0 +1,30 @@
+<div *ngIf="open" class="dialog-container">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <button aria-label="Close" class="close" type="button" (click)="onCancelClick()">
+        <cds-icon aria-hidden="true" shape="close"></cds-icon>
+      </button>
+      <div class="dialog-title">Change Reporting Line</div>
+    </div>
+    <div class="dialog-body">
+      <p>Current Employee: {{ employee?.name }}</p>
+      <form #changeManagerForm="ngForm" (ngSubmit)="onSaveClick()">
+        <div class="clr-select-container">
+          <label>Select Manager</label>
+          <select [(ngModel)]="selectedManagerId" name="manager" required #manager="ngModel">
+            <option *ngFor="let manager of managers$ | async" [value]="manager.id">
+              {{ manager.name }}
+            </option>
+          </select>
+          <div *ngIf="manager.invalid && (manager.dirty || manager.touched)" class="clr-subtext clr-subtext--error error-message">
+            Manager selection is required.
+          </div>
+        </div>
+        <div class="dialog-footer">
+          <button class="btn btn-outline" type="button" (click)="onCancelClick()">Cancel</button>
+          <button class="btn btn-primary" type="submit" [disabled]="changeManagerForm.invalid">Change Reporting Manager</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

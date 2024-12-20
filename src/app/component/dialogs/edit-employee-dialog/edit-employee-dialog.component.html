@@ -1,0 +1,52 @@
+<div *ngIf="open" class="dialog-container">
+  <div class="dialog-content">
+    <div class="dialog-header">
+      <button aria-label="Close" class="close" type="button" (click)="onCancelClick()">
+        <cds-icon aria-hidden="true" shape="close"></cds-icon>
+      </button>
+      <div class="dialog-title">Edit Employee</div>
+    </div>
+    <div class="dialog-body">
+      <form clrForm #editEmployeeForm="ngForm" (ngSubmit)="onSaveClick()">
+        <div class="clr-form-control">
+          <label>Name</label>
+          <input clrInput [(ngModel)]="employee.name" name="name" required #name="ngModel" />
+          <div *ngIf="name.invalid && (name.dirty || name.touched)" class="clr-subtext clr-subtext--error error-message">
+            Name is required.
+          </div>
+        </div>
+        <div class="clr-form-control">
+          <label>Designation</label>
+          <select clrSelect [(ngModel)]="employee.designation" name="designation" required #designation="ngModel">
+            <option *ngFor="let designation of designations" [value]="designation.designation">
+              {{ designation.designation }}
+            </option>
+          </select>
+          <div *ngIf="designation.invalid && (designation.dirty || designation.touched)" class="clr-subtext clr-subtext--error error-message">
+            Designation is required.
+          </div>
+        </div>
+        <div class="clr-form-control">
+          <label>Email</label>
+          <input clrInput [(ngModel)]="employee.email" name="email" type="email" required #email="ngModel" />
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="clr-subtext clr-subtext--error error-message">
+            <div *ngIf="email.errors?.['required']">Email is required.</div>
+            <div *ngIf="email.errors?.['email']">Invalid email address.</div>
+          </div>
+        </div>
+        <div class="clr-form-control">
+          <label>Phone</label>
+          <input clrInput [(ngModel)]="employee.phone" name="phone" type="tel" required pattern="^[0-9]{10}$" #phone="ngModel" />
+          <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="clr-subtext clr-subtext--error error-message">
+            <div *ngIf="phone.errors?.['required']">Phone number is required.</div>
+            <div *ngIf="phone.errors?.['pattern']">Phone number must be 10 digits.</div>
+          </div>
+        </div>
+        <div class="dialog-footer">
+          <button class="btn btn-outline" type="button" (click)="onCancelClick()">Cancel</button>
+          <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

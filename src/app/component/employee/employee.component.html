@@ -1,0 +1,45 @@
+<div>
+  <button (click)="toggleView()" class="btn btn-sm btn-secondary">
+    {{ isGridView ? 'Switch to Tree View' : 'Switch to Grid View' }}
+  </button>
+</div>
+
+<div *ngIf="isGridView">
+  <clr-datagrid  *ngIf="employees as employees">
+    <clr-dg-column>ID</clr-dg-column>
+    <clr-dg-column>Name</clr-dg-column>
+    <clr-dg-column>Designation</clr-dg-column>
+    <clr-dg-column>Email</clr-dg-column>
+    <clr-dg-column>Phone</clr-dg-column>
+    <clr-dg-column>Manager ID</clr-dg-column>
+    <clr-dg-column>Manager</clr-dg-column>
+    <clr-dg-column>Actions</clr-dg-column>
+  
+    <clr-dg-row *ngFor="let employee of employees">
+      <clr-dg-cell>{{ employee.id }}</clr-dg-cell>
+      <clr-dg-cell>{{ employee.name }}</clr-dg-cell>
+      <clr-dg-cell>{{ employee.designation }}</clr-dg-cell>
+      <clr-dg-cell>{{ employee.email }}</clr-dg-cell>
+      <clr-dg-cell>{{ employee.phone }}</clr-dg-cell>
+      <clr-dg-cell>{{ employee.managerId }}</clr-dg-cell>
+      <clr-dg-cell>{{ employee.managerName }}</clr-dg-cell>
+      <clr-dg-cell>
+        <clr-dropdown>
+          <button clrDropdownTrigger class="btn btn-sm btn-secondary">
+            &#x22EE; <!-- Unicode for vertical ellipsis (three dots) -->
+          </button>
+          <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+            <button clrDropdownItem (click)="onEmployeeEdited(employee)">Edit</button>
+            <button clrDropdownItem *ngIf="employee.designation !== 'CEO'" (click)="deleteEmployee(employee)">Delete</button>
+            <button clrDropdownItem *ngIf="employee.designation !== 'CEO'" (click)="changeReportingLine(employee)">Change Manager</button>
+            <button *ngIf="employee.designation !== 'Developer'" (click)="addReportee(employee)">
+              Add Reportee
+            </button>
+          </clr-dropdown-menu>
+        </clr-dropdown>
+      </clr-dg-cell>
+    </clr-dg-row>
+  </clr-datagrid>
+</div>
+<ng-template #dialogContainer></ng-template>
+
